@@ -5,6 +5,19 @@ $soft-red: hsl(0, 94%, 66%);
 $grayish-blue: hsl(229, 8%, 60%);
 $very-dark-blue: hsl(229, 31%, 21%);
 
+@mixin soft-blue-back($opacity: 1) {
+   background-color: hsla(231, 69%, 60%, $opacity);
+}
+@mixin dark-blue-back($opacity: 1) {
+   background-color: hsla(229, 31%, 21%, $opacity);
+}
+
+* {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+
 html {
    font-size: 18px;
 }
@@ -33,3 +46,131 @@ button {
 }
 
 /* #### utility classes #### */
+.container {
+   margin-inline: auto;
+   max-width: 1150px;
+}
+.flex {
+   display: flex;
+}
+.space-between {
+   justify-content: space-between;
+}
+
+.btn {
+   font-size: .8rem;
+   font-weight: 500;
+   display: inline-block;
+}
+.padded-btn {
+
+}
+.sized-btn {
+
+}
+.primary-btn {
+   @include soft-blue-back;
+   color: white;
+}
+
+.sr-only {
+   position: absolute !important;
+   height: 1px;
+   width: 1px;
+   padding: 0;
+   margin: -1px;
+   overflow: hidden;
+   clip: rect(0, 0, 0, 0);
+   white-space: nowrap;
+   border: 0;
+}
+
+.text-uppercase {
+   text-transform: uppercase;
+}
+
+.letter-spacing-2 {
+   letter-spacing: 2px;
+}
+
+.socials {
+   display: flex;
+   align-items: center;
+   gap: 2rem;
+}
+
+.section-padding {
+   padding-inline: min(8vw, 4rem);
+}
+
+/* #### Intro */
+header {
+   height: 80px;
+
+   .container {
+      height: 100%;
+      justify-content: space-between;
+      align-items: center;
+   }
+
+   .nav-container {
+      @include dark-blue-back(.95);
+      position: fixed;
+      inset: 0 0 0 0;
+      padding: 2rem;
+      transition: opacity .2s;
+
+      .socials {
+         position: absolute;
+         bottom: 35px;
+         left: 50%;
+         transform: translateX(-50%);
+      }
+   }
+   .nav-container[data-visible="false"]{
+      opacity: 0;
+      pointer-events: none;
+   }
+}
+
+nav {
+   .login-btn {
+      display: block;
+      color: white;
+      padding: .5rem 0;
+
+      border: 3px solid white;
+      border-radius: .3rem;
+
+      text-align: center;
+      font-size: 1.2rem;
+
+      transition-property: color, background-color;
+      transition-duration: .3s;
+   }
+   .login-btn:hover {
+      background-color: white;
+      color: $very-dark-blue;
+   }
+}
+
+#primary-navigation {
+   margin-block: 2rem;
+
+   li {
+      text-align: center;
+      border-top: 1px solid hsla(0, 0%, 40%);
+
+   }
+   li:last-child {
+      border-bottom: 1px solid hsla(0, 0%, 40%);
+   }
+   
+   a {
+      display: block;
+      color: white;
+      padding: 1rem;
+
+      font-size: 1.2rem;
+   }
+}
