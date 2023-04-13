@@ -46,16 +46,21 @@ a {
   text-decoration: none;
 }
 
-button {
+button,
+input {
   background: none;
   border: 0;
   outline: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* #### utility classes #### */
 .container {
   margin-inline: auto;
-  max-width: 1150px;
+  max-width: 1100px;
 }
 
 .flex {
@@ -74,26 +79,86 @@ button {
   gap: 1rem;
 }
 
-.btn {
+.primary-btn {
+  border-radius: 0.3rem;
+  border-style: solid;
+  border-width: 2px;
   font-size: 0.8rem;
   font-weight: 500;
   display: inline-block;
-  border-radius: 0.3rem;
   box-shadow: 0 5px 15px -5px hsla(231, 69%, 60%, 0.3);
-}
-
-.padded-btn {
-  padding: 0.9rem 1rem;
-}
-
-.primary-btn {
+  transition-property: color, background-color, border-color;
+  transition-duration: 0.3s;
+  padding: 0.8rem 0.8rem 0.7rem;
   background-color: hsl(231, 69%, 60%);
+  border-color: hsl(231, 69%, 60%);
   color: white;
 }
 
+.primary-btn:hover {
+  background-color: white;
+  color: hsl(231, 69%, 60%);
+}
+
 .secondary-btn {
+  border-radius: 0.3rem;
+  border-style: solid;
+  border-width: 2px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+  box-shadow: 0 5px 15px -5px hsla(231, 69%, 60%, 0.3);
+  transition-property: color, background-color, border-color;
+  transition-duration: 0.3s;
+  padding: 0.8rem 0.8rem 0.7rem;
   background-color: hsl(0, 0%, 97%);
   color: hsl(229, 31%, 21%);
+  border-color: hsl(0, 0%, 97%);
+}
+
+.secondary-btn:hover {
+  border-color: hsl(229, 31%, 21%);
+  background-color: white;
+}
+
+.tertiary-btn {
+  border-radius: 0.3rem;
+  border-style: solid;
+  border-width: 2px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+  box-shadow: 0 5px 15px -5px hsla(231, 69%, 60%, 0.3);
+  transition-property: color, background-color, border-color;
+  transition-duration: 0.3s;
+  padding: 0.8rem 0.8rem 0.7rem;
+  background-color: hsl(0, 94%, 66%);
+  border-color: hsl(0, 94%, 66%);
+  color: white;
+}
+
+.tertiary-btn:hover {
+  background-color: white;
+  color: hsl(0, 94%, 66%);
+}
+
+.field {
+  padding: 1rem 1rem 0.95rem;
+  border-radius: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: white;
+  display: block;
+}
+
+.field::-moz-placeholder {
+  color: hsl(0, 0%, 82%);
+  font-weight: 500;
+}
+
+.field::placeholder {
+  color: hsl(0, 0%, 82%);
+  font-weight: 500;
 }
 
 .sr-only {
@@ -121,6 +186,12 @@ button {
   align-items: center;
   gap: 2rem;
 }
+.socials a .icon {
+  transition: fill 0.3s;
+}
+.socials a:hover .icon {
+  fill: hsl(0, 94%, 66%);
+}
 
 .section-padding {
   padding-inline: min(8vw, 4rem);
@@ -141,8 +212,8 @@ footer {
   text-align: center;
 }
 
-section {
-  padding-block: 2rem;
+section .head {
+  text-align: center;
 }
 
 /* ################ Header ################ */
@@ -154,7 +225,8 @@ header .container {
   justify-content: space-between;
   align-items: center;
 }
-header .nav-container {
+
+#nav-container {
   background-color: hsla(229, 31%, 21%, 0.95);
   position: fixed;
   inset: 0 0 0 0;
@@ -162,13 +234,14 @@ header .nav-container {
   padding: 2rem;
   transition: opacity 0.2s;
 }
-header .nav-container .socials {
+#nav-container .socials {
   position: absolute;
   bottom: 35px;
   left: 50%;
   transform: translateX(-50%);
 }
-header .nav-container[data-visible=false] {
+
+#nav-container[data-visible=false] {
   opacity: 0;
   pointer-events: none;
 }
@@ -209,14 +282,19 @@ nav .login-btn:hover {
 /* ################ Intro ################ */
 section#intro {
   padding-inline: min(3vw, 2rem);
+  padding-top: 2.5rem;
+  margin-bottom: 9rem;
   position: relative;
 }
 section#intro .background-pattern {
   top: 100px;
   right: -300px;
 }
-section#intro .content > * + * {
-  margin-top: 1rem;
+section#intro .content h1 {
+  margin-bottom: 1rem;
+}
+section#intro .content p {
+  margin-bottom: 2rem;
 }
 section#intro img {
   margin-bottom: 2.4rem;
@@ -237,12 +315,16 @@ section#intro .buttons {
 /* ################ Features ################ */
 section#features {
   padding-inline: min(10vw, 5rem);
+  margin-bottom: 4rem;
+  text-align: center;
 }
 section#features .head {
   margin-bottom: 2rem;
 }
 section#features .head p {
   line-height: 1.7;
+  max-width: 575px;
+  margin-inline: auto;
 }
 section#features h2 {
   font-size: 1.3rem;
@@ -256,6 +338,9 @@ section#features p {
   border-top: 1px solid hsl(0, 0%, 88%);
   border-bottom: 1px solid hsl(0, 0%, 88%);
   margin-bottom: 4rem;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  margin-inline: auto;
 }
 #selection-list li + li {
   border-top: 1px solid hsl(0, 0%, 88%);
@@ -268,6 +353,11 @@ section#features p {
   font-size: 1rem;
   font-weight: bold;
   color: hsl(229, 8%, 60%);
+  transition-property: color;
+  transition-duration: 0.3s;
+}
+#selection-list button:hover {
+  color: hsl(0, 94%, 66%);
 }
 #selection-list button.active {
   color: hsl(229, 31%, 21%);
@@ -294,9 +384,7 @@ section#features p {
 #tabs .tab {
   padding-bottom: 4rem;
   grid-area: unique;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
+  display: none;
 }
 #tabs .tab img {
   margin-bottom: 4rem;
@@ -306,20 +394,23 @@ section#features p {
   letter-spacing: 0;
   margin-bottom: 0.7rem;
 }
-#tabs .tab .btn {
+#tabs .tab .primary-btn {
   display: none;
 }
 #tabs .tab.visible {
-  opacity: 1;
-  pointer-events: all;
+  display: block;
 }
 
 /* ################ Download Section ################ */
 section#download {
   padding-inline: min(12vw, 5rem);
+  margin-bottom: 8rem;
+}
+section#download .container {
+  max-width: 930px;
 }
 section#download .head {
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
 }
 section#download h2 {
   font-size: 1.25rem;
@@ -329,6 +420,7 @@ section#download p {
   font-size: 0.8rem;
   margin-inline: auto;
   line-height: 1.7;
+  max-width: 550px;
 }
 
 .cards > * + * {
@@ -338,9 +430,10 @@ section#download p {
 .card {
   max-width: 500px;
   margin-inline: auto;
-  box-shadow: 0 10px 15px -5px hsla(231, 69%, 60%, 0.2);
+  box-shadow: 0 7px 15px -3px hsla(231, 69%, 60%, 0.2);
   padding: 3rem 1.3rem 1.3rem;
   border-radius: 1rem;
+  text-align: center;
 }
 .card img {
   margin-bottom: 1.2rem;
@@ -361,6 +454,7 @@ section#download p {
 /* ################ FAQs ################ */
 section#faqs {
   padding-inline: min(10vw, 5rem);
+  margin-bottom: 7rem;
 }
 section#faqs .head {
   margin-bottom: 2rem;
@@ -370,12 +464,16 @@ section#faqs h2 {
   margin-bottom: 0.8rem;
 }
 section#faqs p {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  max-width: 520px;
+  margin-inline: auto;
 }
 
 #faqs-list {
   text-align: left;
   margin-bottom: 3rem;
+  max-width: 500px;
+  margin-inline: auto;
 }
 #faqs-list li {
   border-bottom: 1px solid hsl(0, 0%, 80%);
@@ -384,18 +482,23 @@ section#faqs p {
 .question h3 {
   font-size: 0.85em;
   padding-block: 1rem;
-  font-weight: 400;
   letter-spacing: 0;
+}
+.question .clickable-area {
+  cursor: pointer;
 }
 .question .icon {
   font-size: 1.2rem;
   color: hsl(231, 69%, 60%);
+  -webkit-margin-end: 1rem;
+          margin-inline-end: 1rem;
 }
 .question .answer {
   color: hsl(0, 0%, 40%);
-  padding-block: 1rem;
-  font-size: 0.9rem;
+  padding-block: 0.7rem 1rem;
+  font-weight: 500;
   display: none;
+  line-height: 1.9;
 }
 
 .question[data-is-showing-answer=true] .icon {
@@ -404,4 +507,352 @@ section#faqs p {
 }
 .question[data-is-showing-answer=true] .answer {
   display: block;
+}
+
+/* ################ Contact section ################ */
+section#contact {
+  padding-block: 4.5rem 2rem;
+  padding-inline: min(8vw, 3rem);
+  background-color: hsl(231, 69%, 60%);
+  text-align: center;
+}
+section#contact .container {
+  max-width: 460px;
+}
+section#contact h3,
+section#contact h2 {
+  color: white;
+}
+section#contact h3 {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.25rem;
+  margin-bottom: 0.6rem;
+  font-weight: 400;
+}
+section#contact h2 {
+  font-size: 1.2rem;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+section#contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+section#contact .field-container.failed {
+  background-color: hsl(0, 94%, 66%);
+  padding: 0.15rem;
+  border-radius: 0.3rem;
+}
+section#contact .field-container.failed .error-message {
+  display: block;
+  font-size: 0.6rem;
+  font-style: italic;
+  text-align: left;
+  color: white;
+  margin-left: 0.5rem;
+  margin-block: 0.3rem 0.1rem;
+}
+section#contact .field-container.failed .error-icon {
+  display: block;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+section#contact .error-message,
+section#contact .error-icon {
+  display: none;
+}
+section#contact label {
+  position: relative;
+}
+section#contact .field {
+  width: 100%;
+  padding-right: 3rem;
+}
+
+/* ################ Footer ################ */
+footer {
+  background-color: hsl(229, 31%, 21%);
+  color: white;
+  padding-block: 3rem;
+}
+footer .logo {
+  margin-bottom: 2rem;
+}
+footer .footer-list {
+  margin-bottom: 3rem;
+}
+footer .socials {
+  justify-content: center;
+}
+
+.footer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.footer-list a {
+  color: hsl(0, 0%, 80%);
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.footer-list a:hover {
+  color: hsl(0, 94%, 66%);
+}
+
+.attribution {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: 3rem;
+  padding-inline: 3rem;
+}
+.attribution a {
+  color: hsl(0, 94%, 66%);
+}
+.attribution a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 992px) {
+  .hide-dk {
+    display: none;
+  }
+  .background-pattern {
+    height: 350px;
+  }
+  /* ################ Header ################ */
+  header {
+    height: 200px;
+  }
+  #nav-container,
+  #nav-container[data-visible=false] {
+    opacity: 1;
+    pointer-events: all;
+    background: none;
+    position: static;
+    padding: 0;
+  }
+  nav {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    font-size: 0.7rem;
+  }
+  nav .login-btn {
+    border-radius: 0.3rem;
+    border-style: solid;
+    border-width: 2px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+    box-shadow: 0 5px 15px -5px hsla(231, 69%, 60%, 0.3);
+    transition-property: color, background-color, border-color;
+    transition-duration: 0.3s;
+    padding: 0.8rem 0.8rem 0.7rem;
+    background-color: hsl(0, 94%, 66%);
+    border-color: hsl(0, 94%, 66%);
+    color: white;
+    font-size: 0.7rem;
+    width: auto;
+    padding: 0.6rem 1.6rem 0.7rem;
+  }
+  nav .login-btn:hover {
+    background-color: white;
+    color: hsl(0, 94%, 66%);
+  }
+  #primary-navigation {
+    display: flex;
+    gap: 0.7rem;
+  }
+  #primary-navigation li,
+  #primary-navigation li:last-child {
+    border: 0;
+  }
+  #primary-navigation a {
+    font-size: 0.75rem;
+    color: hsl(229, 31%, 21%);
+    transition: color 0.3s;
+  }
+  #primary-navigation a:hover {
+    color: hsl(0, 94%, 66%);
+  }
+  /* ################ Main, Footer ################ */
+  main,
+  footer {
+    text-align: left;
+  }
+  /* ################ Intro ################ */
+  section#intro .background-pattern {
+    top: 200px;
+    right: -550px;
+  }
+  section#intro .container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-items: space-between;
+  }
+  section#intro .container img {
+    max-width: 120%;
+  }
+  section#intro .container .img-container {
+    width: 50%;
+    flex-basis: 50%;
+  }
+  section#intro .container .content {
+    margin-top: 4rem;
+    width: 40%;
+    flex-grow: 1;
+  }
+  section#intro .buttons {
+    justify-content: start;
+  }
+  section#intro h1 {
+    line-height: 1.2;
+  }
+  section#intro p {
+    font-size: 1rem;
+    margin: 0;
+  }
+  /* ################ Features ################ */
+  section#features h2 {
+    font-size: 1.8rem;
+  }
+  section#features p {
+    font-size: 1.05rem;
+  }
+  #selection-list {
+    display: flex;
+    justify-content: center;
+    border: 0;
+    border-bottom: 1px solid hsl(0, 0%, 88%);
+  }
+  #selection-list li + li {
+    border: 0;
+  }
+  #selection-list button {
+    padding: 1.6rem 3rem;
+    font-size: 0.95rem;
+  }
+  #selection-list button.active .line {
+    width: 100%;
+  }
+  #tabs .background-pattern {
+    top: 100px;
+    left: -600px;
+  }
+  #tabs .tab h3 {
+    font-size: 1.8rem;
+  }
+  #tabs .tab p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  #tabs .tab .primary-btn {
+    display: inline-block;
+  }
+  #tabs .tab.visible {
+    display: flex;
+    gap: 7rem;
+  }
+  #tabs .tab-content {
+    margin-top: 3rem;
+    text-align: left;
+  }
+  section#download {
+    margin-bottom: 13rem;
+  }
+  section#download h2 {
+    font-size: 1.7rem;
+  }
+  section#download p {
+    font-size: 1rem;
+  }
+  .cards {
+    display: flex;
+    justify-content: space-between;
+  }
+  .cards > * + * {
+    margin: 0;
+  }
+  .cards .card:nth-child(2) {
+    position: relative;
+    top: 2rem;
+  }
+  .cards .card:nth-child(3) {
+    position: relative;
+    top: 4rem;
+  }
+  .card {
+    margin: 0;
+  }
+  .card [class*=btn] {
+    padding-inline: 2rem;
+  }
+  section#faqs h2 {
+    font-size: 1.7rem;
+  }
+  section#faqs p {
+    font-size: 1rem;
+  }
+  section#faqs a {
+    margin-inline: auto;
+    display: block;
+    width: -moz-max-content;
+    width: max-content;
+  }
+  .question h3 {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  .question .answer {
+    font-weight: 400;
+  }
+  section#contact {
+    padding-bottom: 4rem;
+  }
+  section#contact h3 {
+    margin-bottom: 2rem;
+  }
+  section#contact h2 {
+    font-size: 1.8rem;
+    font-weight: 400;
+  }
+  section#contact form {
+    flex-direction: row;
+  }
+  section#contact form > * {
+    flex-grow: 1;
+  }
+  section#contact form:has(.field-container.failed) {
+    align-items: start;
+  }
+  footer .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  footer .container > * {
+    flex-shrink: 0;
+    margin: 0;
+  }
+  footer .logo-and-list {
+    display: flex;
+    align-items: center;
+    gap: 3.5rem;
+  }
+  footer .logo,
+  footer .footer-list {
+    margin: 0;
+  }
+  footer .footer-list {
+    flex-direction: row;
+  }
+  footer .footer-list li + li {
+    margin: 0;
+  }
 }/*# sourceMappingURL=index.css.map */

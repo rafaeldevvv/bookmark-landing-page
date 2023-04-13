@@ -1,7 +1,7 @@
 const $ = (query) => document.querySelector(query);
 const $all = (query) => Array.from(document.querySelectorAll(query));
 
-const navContainer = $(".nav-container");
+const navContainer = $("#nav-container");
 const showNavButton = $("#show-nav-button");
 const hideNavButton = $("#hide-nav-button");
 
@@ -41,11 +41,25 @@ const questions = $all("#faqs-list .question");
 questionClickableAreas.forEach((qca, qcaIndex) => {
   qca.addEventListener("click", () => {
     const question = questions[qcaIndex];
-    const isShowingAnswer = question.getAttribute("data-is-showing-answer") === "true";
+    const isShowingAnswer =
+      question.getAttribute("data-is-showing-answer") === "true";
 
     question.setAttribute(
       "data-is-showing-answer",
       isShowingAnswer ? false : true
     );
   });
+});
+
+const emailRegExp = /[\w\d]+@\w+\.\w{2,3}/;
+$("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const emailField = $("form #email");
+  const fieldContainer = $("form .field-container");
+
+  if (!emailRegExp.test(emailField.value)) {
+    fieldContainer.classList.add("failed");
+  } else {
+    location.reload();
+  }
 });
