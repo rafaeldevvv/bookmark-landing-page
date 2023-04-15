@@ -20,10 +20,14 @@ const tabButtons = $all("#selection-list button");
 const tabs = $all(".tab");
 tabButtons.forEach((tabButton, tabButtonIndex) => {
   tabButton.addEventListener("click", () => {
-    // loops over the button and unhighlights them all
-    tabButtons.forEach((tb) => tb.classList.remove("active"));
-    // then highlights the active one
-    tabButton.classList.add("active");
+    // loops over the button and unhighlights them all, except the active one
+    tabButtons.forEach((tb, tbi) => { 
+      if (tbi === tabButtonIndex) {
+        tabButton.classList.add("active");
+      } else {
+        tb.classList.remove("active")
+      }
+    });
 
     // loops over the tabs to find a corresponding index
     tabs.forEach((tab, tabIndex) => {
