@@ -33,8 +33,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [here](https://github.com/rafaeldevvv/bookmark-landing-page)
+- Live Site URL: [here](https://rafaeldevvv.github.io/bookmark-landing-page/)
 
 ## My process
 
@@ -80,7 +80,7 @@ I used the sr-only class for accessibility. It is quite useful:
 }
 ```
 
-I was in doubt if this was readable enough. I hope it is. It was ny first time making tabs.
+I was in doubt if this was readable enough. I hope it is.
 ```js
 const tabButtons = $all("#selection-list button");
 const tabs = $all(".tab");
